@@ -18,6 +18,12 @@ Puppet::Type.newtype(:logical_volume) do
             volume_group resource type."
     end
 
+    newproperty(:enable) do
+        desc "Controls the availability of the  logical  volumes  in  the  volume  group"
+        newvalue(:true)
+        newvalue(:false)
+    end
+
     newparam(:initial_size) do
         desc "The initial size of the logical volume. This will only apply to newly-created volumes"
         validate do |value|
