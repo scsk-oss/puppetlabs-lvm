@@ -5,6 +5,8 @@ Puppet::Type.type(:logical_volume).provide :lvm do
              :lvremove  => 'lvremove',
              :lvextend  => 'lvextend',
              :lvs       => 'lvs',
+             :lvchange  => 'lvchange',
+             :lvdisplay => 'lvdisplay',
              :resize2fs => 'resize2fs',
              :umount    => 'umount',
              :blkid     => 'blkid',
@@ -106,7 +108,6 @@ Puppet::Type.type(:logical_volume).provide :lvm do
         end
     end
 
-
     def enable
         lvpath= "/dev/" + @resource[:volume_group] + "/" + @resource[:name]
         ret=lvdisplay('-c', lvpath )
@@ -128,6 +129,7 @@ Puppet::Type.type(:logical_volume).provide :lvm do
             lvchange("-an", lvpath )
         end
     end
+
 
     private
 
